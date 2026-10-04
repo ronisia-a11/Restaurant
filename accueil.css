@@ -1,0 +1,82 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: linear-gradient(to right, #C0392B, #27AE60);
+}
+
+header {
+  background-color: #C0392B;
+  padding: 15px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav a {
+  color: #F1C40F;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  text-align: center;
+  padding: 50px;
+  background: linear-gradient(to right, #C0392B, #27AE60);
+  color: white;
+}
+
+/* Footer */
+.footer {
+  background-color: #C0392B;
+  color: white;
+  padding: 30px 20px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-links ul, .footer-social ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links a, .footer-social a {
+  color: #F1C40F;
+  text-decoration: none;
+}
+
+/* Icônes colorées */
+.social-icons a {
+  margin: 0 10px;
+  font-size: 24px;
+}
+
+.tiktok { color: #000000; }
+.github { color: #333333; }
+.linkedin { color: #0077B5; }
+.Whatsapp { color: #25D366; }
+.Telephone { color: #C0392B; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+
