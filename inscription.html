@@ -2,19 +2,21 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Inscription - Douala Délices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="inscription.css">
-  <link href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" rel="stylesheet">
 </head>
-
 <body>
-
-  
-  <header>
+  <header id="entete" class="scrolled">
     <nav>
-      <ul>
+      <a class="logo" href="index.html">Douala <span>Délices</span></a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">&#9776;</button>
+      <ul id="liens">
         <li><a href="index.html">Accueil</a></li>
-        <li><a href="inscription.html">Inscription</a></li>
+        <li><a href="inscription.html" class="actif">Inscription</a></li>
         <li><a href="menus.html">Menus</a></li>
         <li><a href="reservation.html">Réservation</a></li>
         <li><a href="livraison.html">Livraison</a></li>
@@ -24,84 +26,196 @@
     </nav>
   </header>
 
-  <section> 
-    <h2>Inscrivez-vous</h2>
-    <form id="formInscription" action="traitement_inscription.php" method="POST" enctype="multipart/form-data">
-      <label>Nom :</label>
-      <input type="text" name="nom">
-      <label>Email :</label>
-      <input type="email" name="email" required>
-      <label>Mot de passe :</label>
-      <input type="password" name="mot_de_passe" required>
-      <label for="langue">Langue parlee :</label>
-      <select name="langue">
-        <option>Francais</option>
-        <option>Anglais</option>
-        <option>Allemand</option>
-        <option>Espagnol</option>
-        <option>Mandarin</option>
-        <option>Japonais</option>
-        <option>Arabe</option>
-        <option>Portugais</option>
-        <option>Swahili</option>
-        <option>Malgache</option>
-      </select>
-      <label for="quartier">Adresse :</label>
-      <select name="adresse">
-        <option>Bilongue</option>
-        <option>Akwa</option>
-        <option>Village</option>
-        <option>Yassa</option>
-        <option>Lendi</option>
-        <option>Ndokoti</option>
-        <option>Ange Raphael</option>
-        <option>elf</option>
-        <option>Dakar</option>
-        <option>Marche-village</option>
-        <option>Bonanjo</option>
-        <option>Bonamoussadi</option>
-        <option>Bonaberi</option>
-      </select>
-      <label>Telephone :</label>
-      <input type="text" name="telephone">
-      <button type="submit">S'inscrire</button>
-    </form>
-  </section>
+  <main class="page">
+    <aside class="cote">
+      <h1 id="titre">Rejoignez Douala Délices</h1>
+      <p id="texte">Un seul compte pour réserver une table et commander en livraison.</p>
+      <ul>
+        <li>Réservation en quelques clics</li>
+        <li>Suivi de livraison par SMS</li>
+        <li>Livraison dans votre quartier</li>
+      </ul>
+    </aside>
+
+    <section class="zone">
+      <div class="carte">
+        <div class="onglets" role="tablist">
+          <button role="tab" id="t-ins" aria-selected="true" aria-controls="formInscription">Créer un compte</button>
+          <button role="tab" id="t-con" aria-selected="false" aria-controls="formConnexion">J'ai déjà un compte</button>
+        </div>
+        <div class="alerte" id="alerte" role="alert" hidden></div>
+
+        <h2 hidden>Inscrivez-vous</h2>
+        <form id="formInscription" action="traitement_inscription.php" method="POST" enctype="multipart/form-data" novalidate>
+          <input type="hidden" name="redirect" class="redir">
+          <div class="champ"><label for="nom">Nom</label><input id="nom" type="text" name="nom" autocomplete="name" required><div class="err"></div></div>
+          <div class="champ"><label for="email">Email</label><input id="email" type="email" name="email" autocomplete="email" required><div class="err"></div></div>
+          <div class="champ"><label for="mdp">Mot de passe</label>
+            <div class="mdp"><input id="mdp" type="password" name="mot_de_passe" autocomplete="new-password" required><button type="button" class="oeil" aria-pressed="false">Afficher</button></div>
+            <div class="force"><i id="force"></i></div><div class="err"></div></div>
+          <div class="champ"><label for="conf">Confirmer le mot de passe</label><input id="conf" type="password" name="confirmation" autocomplete="new-password" required><div class="err"></div></div>
+          <div class="duo">
+            <div class="champ"><label for="langue">Langue parlée</label>
+              <select id="langue" name="langue">
+                <option>Français</option><option>Anglais</option><option>Allemand</option><option>Espagnol</option><option>Mandarin</option><option>Japonais</option><option>Arabe</option><option>Portugais</option><option>Swahili</option><option>Malgache</option>
+              </select></div>
+            <div class="champ"><label for="quartier">Quartier</label>
+              <select id="quartier" name="adresse">
+                <option>Bilongue</option><option>Akwa</option><option>Village</option><option>Yassa</option><option>Lendi</option><option>Ndokoti</option><option>Ange Raphael</option><option>elf</option><option>Dakar</option><option>Marche-village</option><option>Bonanjo</option><option>Bonamoussadi</option><option>Bonaberi</option>
+              </select></div>
+          </div>
+          <div class="champ"><label for="tel">Téléphone</label><input id="tel" type="tel" name="telephone" placeholder="6 77 00 00 00" autocomplete="tel" required><div class="err"></div></div>
+          <div class="champ"><label class="accord"><input type="checkbox" name="accepte" value="1" required><span>J'accepte la <a href="politique.html" target="_blank">politique de confidentialité</a>.</span></label><div class="err"></div></div>
+          <button type="submit" class="btn btn-or valider">S'inscrire</button>
+        </form>
+
+        <form id="formConnexion" action="connexion.php" method="POST" novalidate hidden>
+          <input type="hidden" name="redirect" class="redir">
+          <div class="champ"><label for="c-email">Email</label><input id="c-email" type="email" name="email" autocomplete="email" required><div class="err"></div></div>
+          <div class="champ"><label for="c-mdp">Mot de passe</label>
+            <div class="mdp"><input id="c-mdp" type="password" name="mot_de_passe" autocomplete="current-password" required><button type="button" class="oeil" aria-pressed="false">Afficher</button></div>
+            <div class="err"></div></div>
+          <button type="submit" class="btn btn-or valider">Se connecter</button>
+        </form>
+
+        <div class="succes" id="succes" aria-live="polite">
+          <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="45"/><path d="M30 52l14 14 27-30"/></svg>
+          <h2 id="succes-titre">Bienvenue !</h2>
+          <p>Redirection en cours…</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <!-- Navigation -->
-            <div class="footer-links">
-                <h3>Navigation</h3>
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="inscription.html">Inscription</a></li>
-                    <li><a href="menus.html">Menus</a></li>
-                    <li><a href="reservation.html">Réservation</a></li>
-                    <li><a href="livraison.html">Livraison</a></li>
-                    <li><a href="aide.html">Aide</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <!-- Réseaux sociaux -->
-            <div class="footer-social">
-                <h3>Me suivre</h3>
-                <ul>
-                    <li><a href="mailto:offilieoffilie@gmail.com">Mon Gmail</a></li>
-                </ul>
-                    <div class="social-icons">
-                        <a href="https://www.tiktok.com/@linformaticien18" target="_blank" class="tiktok"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://github.com/ronisia-a11" target="_blank" class="github"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/ronis-offilie-falleu-lendeu-3676a8395/" target="_blank" class="linkedin"><i class="fab fa-linkedin"></i></a>
-                    </div>
-            </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Navigation -->
+      <div class="footer-links">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="inscription.html">Inscription</a></li>
+          <li><a href="menus.html">Menus</a></li>
+          <li><a href="reservation.html">Réservation</a></li>
+          <li><a href="livraison.html">Livraison</a></li>
+          <li><a href="aide.html">Aide</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <!-- Réseaux sociaux -->
+      <div class="footer-social">
+        <h3>Me suivre</h3>
+        <ul>
+          <li><a href="mailto:offilieoffilie@gmail.com">Mon Gmail</a></li>
+        </ul>
+        <div class="social-icons">
+          <a href="https://www.tiktok.com/@linformaticien18" target="_blank" class="tiktok" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://github.com/ronisia-a11" target="_blank" class="github" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/ronis-offilie-falleu-lendeu-3676a8395/" target="_blank" class="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 RONIS OFFILIE. Tous droits réservés</p>
- `      </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 RONIS OFFILIE. Tous droits réservés</p>
+    </div>
   </footer>
 
-</body>
+  <script>
+    const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+    const P = new URLSearchParams(location.search);
+    const PAGES = ['index.html','menus.html','reservation.html','livraison.html','aide.html','contact.html'];
+    const suite = PAGES.includes(P.get('redirect')) ? P.get('redirect') : 'index.html';
+    $$('.redir').forEach(i => i.value = suite);
 
+    // Menu mobile
+    $('#burger').addEventListener('click', () => {
+      const o = $('#liens').classList.toggle('ouvert'); $('#burger').setAttribute('aria-expanded', o);
+    });
+
+    // Message selon la raison de la redirection
+    const MSG = {
+      reservation: ['Un compte pour réserver', 'Créez votre compte en une minute, puis vous reviendrez directement à votre réservation.'],
+      commande: ['Un compte pour commander', 'Créez votre compte en une minute. Vous suivrez ensuite votre livraison par SMS.']
+    };
+    const m = MSG[P.get('raison')];
+    if (m) { $('#titre').textContent = m[0]; $('#texte').textContent = m[1]; }
+    if (P.get('erreur')) { $('#alerte').textContent = P.get('erreur'); $('#alerte').hidden = false; }
+
+    // Onglets
+    function montrer(con) {
+      $('#formInscription').hidden = con; $('#formConnexion').hidden = !con;
+      $('#t-ins').setAttribute('aria-selected', !con); $('#t-con').setAttribute('aria-selected', con);
+      $('#alerte').hidden = true;
+    }
+    $('#t-ins').onclick = () => montrer(false);
+    $('#t-con').onclick = () => montrer(true);
+    if (P.get('mode') === 'connexion') montrer(true);
+
+    // Afficher / masquer le mot de passe
+    $$('.oeil').forEach(b => b.addEventListener('click', () => {
+      const i = b.previousElementSibling, v = i.type === 'password';
+      i.type = v ? 'text' : 'password'; b.textContent = v ? 'Masquer' : 'Afficher'; b.setAttribute('aria-pressed', v);
+    }));
+
+    // Force du mot de passe
+    $('#mdp').addEventListener('input', e => {
+      const v = e.target.value; let s = 0;
+      if (v.length >= 8) s++; if (/[A-Z]/.test(v) && /[a-z]/.test(v)) s++; if (/\d/.test(v)) s++; if (/[^A-Za-z0-9]/.test(v) || v.length >= 12) s++;
+      const f = $('#force'); f.style.width = (s * 25) + '%'; f.style.background = ['#ddd', '#b8322a', '#e9a23b', '#8bbf4a', '#2e9b4f'][s];
+    });
+
+    // Validation
+    const regles = {
+      nom: v => v.trim().length >= 2 || 'Entrez votre nom (2 caractères minimum).',
+      email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || 'Entrez une adresse email valide.',
+      mot_de_passe: (v, f) => f.id === 'formConnexion' ? (v.length > 0 || 'Entrez votre mot de passe.') : (v.length >= 8 || '8 caractères minimum.'),
+      confirmation: v => v === $('#mdp').value || 'Les mots de passe ne correspondent pas.',
+      telephone: v => /^(\+?237)?[26]\d{8}$/.test(v.replace(/[\s.-]/g, '')) || 'Numéro camerounais attendu, ex. 6 77 00 00 00.',
+      accepte: (v, f, el) => el.checked || 'Vous devez accepter la politique de confidentialité.'
+    };
+    function verifier(el) {
+      const r = regles[el.name]; if (!r) return true;
+      const res = r(el.value, el.form, el), ok = res === true;
+      el.setAttribute('aria-invalid', !ok);
+      el.closest('.champ').querySelector('.err').textContent = ok ? '' : res;
+      return ok;
+    }
+    $$('form input').forEach(el => {
+      el.addEventListener('blur', () => { if (el.value || el.type === 'checkbox') verifier(el); });
+      el.addEventListener('input', () => { if (el.getAttribute('aria-invalid') === 'true') verifier(el); });
+    });
+    $('#mdp').addEventListener('input', () => { if ($('#conf').value) verifier($('#conf')); });
+
+    // Envoi
+    $$('form').forEach(f => f.addEventListener('submit', async e => {
+      e.preventDefault();
+      const champs = [...f.querySelectorAll('input')].filter(i => regles[i.name]);
+      const faux = champs.filter(i => !verifier(i));
+      if (faux.length) { faux[0].focus(); return; }
+      const btn = f.querySelector('.valider'), txt = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Envoi…'; $('#alerte').hidden = true;
+      try {
+        const rep = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'X-Requested-With': 'fetch' }, credentials: 'same-origin' });
+        const d = await rep.json();
+        if (d.ok) {
+          $('#succes-titre').textContent = 'Bienvenue, ' + d.nom + ' !';
+          $('#succes').classList.add('on');
+          setTimeout(() => location.href = PAGES.includes(d.redirect) ? d.redirect : 'index.html', 1800);
+          return;
+        }
+        Object.entries(d.erreurs || {}).forEach(([k, msg]) => {
+          const el = f.querySelector(`[name="${k}"]`);
+          if (el) { el.setAttribute('aria-invalid', 'true'); el.closest('.champ').querySelector('.err').textContent = msg; }
+          else { $('#alerte').textContent = msg; $('#alerte').hidden = false; }
+        });
+        const p = f.querySelector('[aria-invalid="true"]'); if (p) p.focus();
+      } catch (x) {
+        $('#alerte').textContent = "Connexion impossible. Vérifiez votre réseau et réessayez.";
+        $('#alerte').hidden = false;
+      }
+      btn.disabled = false; btn.textContent = txt;
+    }));
+  </script>
+</body>
 </html>

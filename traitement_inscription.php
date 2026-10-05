@@ -1,29 +1,39 @@
 <?php
-header('Content-Type: application/json');
-require 'config.php'; // fichier qui contient la connexion PDO à ta base MySQL
+require __DIR__ . '/auth.php';
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: inscription.html'); exit; }
 
-// Récupération et nettoyage des champs
-$nom_telephone = htmlspecialchars(trim($_POST['nom'] ?? ''));
-$email = htmlspecialchars(trim($_POST['email'] ?? ''));
-$mot_de_passe = htmlspecialchars(trim($_POST['mot_de_passe'] ?? ''));
-$langue = htmlspecialchars(trim($_POST['langue'] ?? ''));
-$adresse = htmlspecialchars(trim($_POST['adresse'] ?? ''));
-$telephone = htmlspecialchars(trim($_POST['telephone'] ?? ''));
+$ajax = ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'fetch';
+$nom = trim($_POST['nom'] ?? '');
+$email = strtolower(trim($_POST['email'] ?? ''));
+$mdp = $_POST['mot_de_passe'] ?? '';
+$langue = mb_substr(trim($_POST['langue'] ?? ''), 0, 40);
+$adresse = mb_substr(trim($_POST['adresse'] ?? ''), 0, 60);
+$tel = preg_replace('/[\s.\-]/', '', $_POST['telephone'] ?? '');
+$suite = page_sure($_POST['redirect'] ?? '');
 
-// Vérification basique
-if (empty($nom_telephone) || empty($email) || empty($mot_de_passe) || empty($langue) || empty($adresse) || empty($telephone)) {
-    echo json_encode(['statut'=>'erreur','message'=>'Tous les champs sont obligatoires']);
-    exit;
+$e = [];
+if (mb_strlen($nom) < 2 || mb_strlen($nom) > 80) $e['nom'] = 'Entrez votre nom (2 caractères minimum).';
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $e['email'] = 'Entrez une adresse email valide.';
+if (strlen($mdp) < 8) $e['mot_de_passe'] = '8 caractères minimum.';
+elseif ($mdp !== ($_POST['confirmation'] ?? '')) $e['confirmation'] = 'Les mots de passe ne correspondent pas.';
+if (!preg_match('/^(\+?237)?[26]\d{8}$/', $tel)) $e['telephone'] = 'Numéro camerounais attendu, ex. 6 77 00 00 00.';
+if (empty($_POST['accepte'])) $e['accepte'] = 'Vous devez accepter la politique de confidentialité.';
+
+if (!$e) {
+    $q = db()->prepare('SELECT 1 FROM utilisateurs WHERE email = ?');
+    $q->execute([$email]);
+    if ($q->fetch()) $e['email'] = 'Cet email a déjà un compte. Utilisez « J\'ai déjà un compte ».';
 }
 
-// Sécurisation du mot de passe (hachage)
-$mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+if (!$e) {
+    $q = db()->prepare('INSERT INTO utilisateurs (nom, email, mot_de_passe, langue, adresse, telephone) VALUES (?,?,?,?,?,?)');
+    $q->execute([$nom, $email, password_hash($mdp, PASSWORD_DEFAULT), $langue, $adresse, $tel]);
+    session_regenerate_id(true);
+    $_SESSION['user_id'] = (int) db()->lastInsertId();
+    $_SESSION['nom'] = $nom;
+    if ($ajax) json_out(['ok' => true, 'nom' => $nom, 'redirect' => $suite]);
+    header('Location: ' . $suite); exit;
+}
 
-// Insertion SQL dans la table client
-$sql = "INSERT INTO client (nom_telephone, telephone, email, mot_de_passe, langue, adresse) 
-        VALUES (?, ?, ?, ?, ?, ?)";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$nom_telephone, $telephone, $email, $mot_de_passe_hash, $langue, $adresse]);
-
-echo json_encode(['statut'=>'ok','message'=>'Client ajouté avec succès !']);
-?>
+if ($ajax) json_out(['ok' => false, 'erreurs' => $e], 422);
+header('Location: inscription.html?erreur=' . urlencode(implode(' ', $e)) . '&redirect=' . urlencode($suite));

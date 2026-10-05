@@ -2,14 +2,20 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Accueil - Douala Délices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="accueil.css">
 </head>
 <body>
-  <header>
+  <header id="entete">
     <nav>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
+      <a class="logo" href="index.html">Douala <span>Délices</span></a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">&#9776;</button>
+      <ul id="liens">
+        <li><a href="index.html" class="actif">Accueil</a></li>
         <li><a href="inscription.html">Inscription</a></li>
         <li><a href="menus.html">Menus</a></li>
         <li><a href="reservation.html">Réservation</a></li>
@@ -21,43 +27,181 @@
   </header>
 
   <section class="hero">
-    <h1>Bienvenue chez Douala Délices</h1>
-    <p>Saveurs africaines et internationales à votre portée.</p>
+    <div class="slide on" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=70')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=70')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=70')"></div>
+    <div class="hero-contenu">
+      <h1>Bienvenue chez Douala Délices</h1>
+      <p>Saveurs africaines et internationales à votre portée.</p>
+      <div class="boutons">
+        <a class="btn btn-or" href="reservation.html">Réserver une table</a>
+        <a class="btn btn-ghost" href="menus.html">Voir les menus</a>
+      </div>
+      <div class="statut" id="statut"><i></i><span>Horaires du jour…</span></div>
+    </div>
+  </section>
+
+  <section class="bloc" id="plats">
+    <div class="titre reveal">
+      <h2>Nos plats à l'honneur</h2>
+      <p>Une cuisine généreuse, de la grillade camerounaise aux classiques d'ailleurs.</p>
+    </div>
+    <div class="filtres reveal" role="group" aria-label="Filtrer les plats">
+      <button class="actif" data-filtre="tous">Tous</button>
+      <button data-filtre="africain">Africain</button>
+      <button data-filtre="international">International</button>
+    </div>
+    <div class="plats">
+      <article class="plat reveal" data-cat="africain">
+        <div class="photo" style="background-image:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=70')"></div>
+        <div class="txt"><h3>Brochettes grillées</h3><p>Viande marinée aux épices, grillée au feu de bois.</p><span class="tag">Africain</span></div>
+      </article>
+      <article class="plat reveal" data-cat="africain">
+        <div class="photo" style="background-image:url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=800&q=70')"></div>
+        <div class="txt"><h3>Poisson braisé</h3><p>Servi avec bâton de manioc ou plantains et sauce pimentée.</p><span class="tag">Africain</span></div>
+      </article>
+      <article class="plat reveal" data-cat="africain">
+        <div class="photo" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=70')"></div>
+        <div class="txt"><h3>Plat du chef</h3><p>La recette du jour, préparée avec des produits frais du marché.</p><span class="tag">Africain</span></div>
+      </article>
+      <article class="plat reveal" data-cat="international">
+        <div class="photo" style="background-image:url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=70')"></div>
+        <div class="txt"><h3>Pizza maison</h3><p>Pâte fine, mozzarella fondante et garnitures au choix.</p><span class="tag">International</span></div>
+      </article>
+      <article class="plat reveal" data-cat="international">
+        <div class="photo" style="background-image:url('https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=70')"></div>
+        <div class="txt"><h3>Pâtes fraîches</h3><p>Sauce tomate basilic ou crème, cuites al dente.</p><span class="tag">International</span></div>
+      </article>
+      <article class="plat reveal" data-cat="international">
+        <div class="photo" style="background-image:url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=70')"></div>
+        <div class="txt"><h3>Salade composée</h3><p>Légumes croquants, vinaigrette légère, parfaite en entrée.</p><span class="tag">International</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="apropos">
+    <div class="apropos-grille">
+      <div class="reveal">
+        <h2>Un restaurant, deux horizons</h2>
+        <p>Chez Douala Délices, on cuisine comme on reçoit : avec générosité. Nos recettes africaines côtoient des plats venus du monde entier, pour que chaque table y trouve son bonheur.</p>
+        <p>Sur place, à emporter ou en livraison, vous mangez chaud et frais.</p>
+        <div class="chiffres">
+          <div><strong data-cible="30">0</strong><span>plats au menu</span></div>
+          <div><strong data-cible="2">0</strong><span>cuisines à découvrir</span></div>
+          <div><strong data-cible="7">0</strong><span>jours sur 7</span></div>
+        </div>
+      </div>
+      <div class="img reveal" style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=70')" role="img" aria-label="Salle du restaurant"></div>
+    </div>
+  </section>
+
+  <section class="bloc" id="horaires">
+    <div class="titre reveal"><h2>Horaires d'ouverture</h2></div>
+    <ul class="horaires reveal" id="liste-horaires">
+      <li data-j="1"><span>Lundi</span><span>11h – 22h</span></li>
+      <li data-j="2"><span>Mardi</span><span>11h – 22h</span></li>
+      <li data-j="3"><span>Mercredi</span><span>11h – 22h</span></li>
+      <li data-j="4"><span>Jeudi</span><span>11h – 22h</span></li>
+      <li data-j="5"><span>Vendredi</span><span>11h – 23h</span></li>
+      <li data-j="6"><span>Samedi</span><span>11h – 23h</span></li>
+      <li data-j="0"><span>Dimanche</span><span>12h – 21h</span></li>
+    </ul>
+  </section>
+
+  <section class="appel">
+    <h2>Une envie, une table, un livreur ?</h2>
+    <div class="boutons">
+      <a class="btn btn-or" href="reservation.html">Réserver</a>
+      <a class="btn btn-ghost" href="livraison.html">Se faire livrer</a>
+    </div>
   </section>
 
   <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <!-- Navigation -->
-            <div class="footer-links">
-                <h3>Navigation</h3>
-                <ul>
-                  <li><a href="index.html">Accueil</a></li>
-                  <li><a href="inscription.html">Inscription</a></li>
-                  <li><a href="menus.html">Menus</a></li>
-                  <li><a href="reservation.html">Réservation</a></li>
-                  <li><a href="livraison.html">Livraison</a></li>
-                  <li><a href="aide.html">Aide</a></li>
-                  <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <!-- Réseaux sociaux -->
-            <div class="footer-social">
-                <h3>Me suivre</h3>
-                <ul>
-                    <li><a href="mailto:offilieoffilie@gmail.com">Mon Gmail</a></li>
-                </ul>
-                    <div class="social-icons">
-                        <a href="https://www.tiktok.com/@linformaticien18" target="_blank" class="tiktok"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://github.com/ronisia-a11" target="_blank" class="github"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/ronis-offilie-falleu-lendeu-3676a8395/" target="_blank" class="linkedin"><i class="fab fa-linkedin"></i></a>
-                    </div>
-            </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Navigation -->
+      <div class="footer-links">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="inscription.html">Inscription</a></li>
+          <li><a href="menus.html">Menus</a></li>
+          <li><a href="reservation.html">Réservation</a></li>
+          <li><a href="livraison.html">Livraison</a></li>
+          <li><a href="aide.html">Aide</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <!-- Réseaux sociaux -->
+      <div class="footer-social">
+        <h3>Me suivre</h3>
+        <ul>
+          <li><a href="mailto:offilieoffilie@gmail.com">Mon Gmail</a></li>
+        </ul>
+        <div class="social-icons">
+          <a href="https://www.tiktok.com/@linformaticien18" target="_blank" class="tiktok" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://github.com/ronisia-a11" target="_blank" class="github" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/ronis-offilie-falleu-lendeu-3676a8395/" target="_blank" class="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
         </div>
-        <div class="footer-bottom">
-          <p>&copy; 2026 RONIS OFFILIE. Tous droits réservés</p>
- `      </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 RONIS OFFILIE. Tous droits réservés</p>
+    </div>
   </footer>
 
+  <button id="haut" aria-label="Retour en haut">&#8593;</button>
+
+  <script>
+    // Menu mobile
+    const burger = document.getElementById('burger'), liens = document.getElementById('liens');
+    burger.addEventListener('click', () => {
+      const ouvert = liens.classList.toggle('ouvert');
+      burger.setAttribute('aria-expanded', ouvert);
+    });
+
+    // En-tête + bouton retour en haut
+    const entete = document.getElementById('entete'), haut = document.getElementById('haut');
+    function onScroll() {
+      entete.classList.toggle('scrolled', scrollY > 60);
+      haut.classList.toggle('visible', scrollY > 500);
+    }
+    addEventListener('scroll', onScroll); onScroll();
+    haut.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Diaporama du hero
+    const slides = document.querySelectorAll('.slide'); let s = 0;
+    setInterval(() => {
+      slides[s].classList.remove('on'); s = (s + 1) % slides.length; slides[s].classList.add('on');
+    }, 6000);
+
+    // Filtre des plats
+    const boutons = document.querySelectorAll('.filtres button'), plats = document.querySelectorAll('.plat');
+    boutons.forEach(b => b.addEventListener('click', () => {
+      boutons.forEach(x => x.classList.remove('actif')); b.classList.add('actif');
+      plats.forEach(p => p.classList.toggle('cache', b.dataset.filtre !== 'tous' && p.dataset.cat !== b.dataset.filtre));
+    }));
+
+    // Ouvert / fermé (heure de Douala)
+    const H = { 0: [12, 21], 1: [11, 22], 2: [11, 22], 3: [11, 22], 4: [11, 22], 5: [11, 23], 6: [11, 23] };
+    const maintenant = new Date(new Date().toLocaleString('en-US', { timeZone: 'Africa/Douala' }));
+    const j = maintenant.getDay(), h = maintenant.getHours() + maintenant.getMinutes() / 60;
+    const [o, f] = H[j], statut = document.getElementById('statut');
+    const ouvert = h >= o && h < f;
+    statut.classList.add(ouvert ? 'ouvert' : 'ferme');
+    statut.querySelector('span').textContent = ouvert ? `Ouvert maintenant · jusqu'à ${f}h` : `Fermé · ouvre à ${o}h`;
+    document.querySelector(`#liste-horaires li[data-j="${j}"]`).classList.add('auj');
+
+    // Apparition au défilement + compteurs
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('vu'); io.unobserve(e.target);
+      e.target.querySelectorAll('[data-cible]').forEach(n => {
+        const cible = +n.dataset.cible; let v = 0;
+        const t = setInterval(() => { v += Math.max(1, Math.ceil(cible / 30)); if (v >= cible) { v = cible; clearInterval(t); } n.textContent = v + (cible >= 30 ? '+' : ''); }, 40);
+      });
+    }), { threshold: .15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
