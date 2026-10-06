@@ -2,18 +2,24 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Réservation - Douala Délices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="reservation.css">
   <script src="garde.js"></script>
 </head>
 <body>
-  <header>
+  <header id="entete" class="scrolled">
     <nav>
-      <ul>
+      <a class="logo" href="index.html">Douala <span>Délices</span></a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">&#9776;</button>
+      <ul id="liens">
         <li><a href="index.html">Accueil</a></li>
         <li><a href="inscription.html">Inscription</a></li>
         <li><a href="menus.html">Menus</a></li>
-        <li><a href="reservation.html">Réservation</a></li>
+        <li><a href="reservation.html" class="actif">Réservation</a></li>
         <li><a href="livraison.html">Livraison</a></li>
         <li><a href="aide.html">Aide</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -21,65 +27,85 @@
     </nav>
   </header>
 
-  <section>
-    <h2>Réservez</h2>
-    <form id="formInscription" action="traitement_reservation.php" method="POST" enctype="multipart/form-data">
-      <label>Nom :</label>
-      <input type="text" name="nom" required>
-
-      <label>Type :</label>
-      <select name="type">
-        <option>Nourriture</option>
-        <option>Table a manger</option>
-        <option>Salle de restaurant</option>
-      </select>
-
-      <label>Date :</label>
-      <input type="date" name="date" required>
-
-      <label>Heure de debut :</label>
-      <input type="time" name="heure_debut" required>
-
-      <label>Heure de fin :</label>
-      <input type="time" name="heure_fin" required>
-
-      <button type="submit">Valider</button>
-    </form>
+  <section class="banniere" style="--img:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=70')">
+    <h1>Réservez</h1>
+    <p>Une table, la salle ou un plat à l'avance : choisissez votre créneau.</p>
   </section>
 
+  <main class="contenu">
+
+    <div class="deux" id="reserver">
+      <div class="carte">
+        <h2>Votre réservation</h2>
+        <form id="formReservation" action="traitement_reservation.php" method="POST" enctype="multipart/form-data" novalidate>
+          <div class="alerte" role="alert" hidden></div>
+          <div class="champ"><label for="nom">Nom</label><input id="nom" type="text" name="nom" autocomplete="name" required><div class="err"></div></div>
+          <fieldset class="types"><legend>Type</legend>
+            <label class="choix"><input type="radio" name="type" value="table" checked><span><b>Table à manger</b><small>Pour manger sur place, seul ou en groupe</small></span></label>
+            <label class="choix"><input type="radio" name="type" value="salle"><span><b>Salle de restaurant</b><small>La salle pour un événement ou un grand groupe</small></span></label>
+            <label class="choix"><input type="radio" name="type" value="nourriture"><span><b>Nourriture</b><small>Des plats préparés à l'avance pour une heure précise</small></span></label>
+          </fieldset>
+          <div class="champ"><label for="date">Date</label><input id="date" type="date" name="date" required><div class="err"></div><div class="info" id="info"></div></div>
+          <div class="duo">
+            <div class="champ"><label for="hd">Heure de début</label><input id="hd" type="time" name="heure_debut" step="1800" required><div class="err"></div></div>
+            <div class="champ"><label for="hf">Heure de fin</label><input id="hf" type="time" name="heure_fin" step="1800" required><div class="err"></div></div>
+          </div>
+          <div class="champ"><label for="pers">Nombre de personnes</label>
+            <div class="pers"><span class="pas"><button type="button" data-p="-1" aria-label="Moins">−</button></span><input id="pers" type="number" name="personnes" min="1" max="30" value="2" required><span class="pas"><button type="button" data-p="1" aria-label="Plus">+</button></span></div><div class="err"></div></div>
+          <div class="champ"><label for="notes">Précisions (facultatif)</label><input id="notes" type="text" name="notes" maxlength="300" placeholder="Anniversaire, allergies, plats souhaités…"><div class="err"></div></div>
+          <button type="submit" class="btn btn-or valider">Valider la réservation</button>
+        </form>
+      </div>
+      <aside class="carte resume" id="recap">
+        <h2>Récapitulatif</h2>
+        <dl><dt>Nom</dt><dd id="r-nom">—</dd><dt>Type</dt><dd id="r-type">Table à manger</dd><dt>Date</dt><dd id="r-date">—</dd><dt>Horaire</dt><dd id="r-heure">—</dd><dt>Personnes</dt><dd id="r-pers">2</dd></dl>
+      </aside>
+    </div>
+    <div class="carte ok" id="ok" hidden>
+      <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="45"/><path d="M30 52l14 14 27-30"/></svg>
+      <h2>Réservation enregistrée</h2>
+      <p class="num" id="num"></p>
+      <div class="resume" id="recap-ok" style="width:100%;position:static"></div>
+      <a class="btn btn-or" href="menus.html">Voir les menus</a>
+    </div>
+  </main>
+
   <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <!-- Navigation -->
-            <div class="footer-links">
-                <h3>Navigation</h3>
-                <ul>
-       <li><a href="index.html">Accueil</a></li>
-        <li><a href="inscription.html">Inscription</a></li>
-        <li><a href="menus.html">Menus</a></li>
-        <li><a href="reservation.html">Réservation</a></li>
-        <li><a href="livraison.html">Livraison</a></li>
-        <li><a href="aide.html">Aide</a></li>
-        <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <!-- Réseaux sociaux -->
-            <div class="footer-social">
-                <h3>Me suivre</h3>
-                <ul>
-                    <li><a href="mailto:offilieoffilie@gmail.com">Mon Gmail</a></li>
-                </ul>
-                    <div class="social-icons">
-                        <a href="https://www.tiktok.com/@linformaticien18" target="_blank" class="tiktok"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://github.com/ronisia-a11" target="_blank" class="github"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/ronis-offilie-falleu-lendeu-3676a8395/" target="_blank" class="linkedin"><i class="fab fa-linkedin"></i></a>
-                    </div>
-            </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Navigation -->
+      <div class="footer-links">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="inscription.html">Inscription</a></li>
+          <li><a href="menus.html">Menus</a></li>
+          <li><a href="reservation.html">Réservation</a></li>
+          <li><a href="livraison.html">Livraison</a></li>
+          <li><a href="aide.html">Aide</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <!-- Réseaux sociaux -->
+      <div class="footer-social">
+        <h3>Me suivre</h3>
+        <ul>
+          <li><a href="mailto:offilieoffilie@gmail.com">Mon Gmail</a></li>
+        </ul>
+        <div class="social-icons">
+          <a href="https://www.tiktok.com/@linformaticien18" target="_blank" class="tiktok" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://github.com/ronisia-a11" target="_blank" class="github" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/ronis-offilie-falleu-lendeu-3676a8395/" target="_blank" class="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 RONIS OFFILIE. Tous droits réservés</p>
- `      </div>
-    </footer>
-    
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 RONIS OFFILIE. Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="site.js"></script>
+  <script src="reservation.js"></script>
 </body>
 </html>

@@ -1,0 +1,39 @@
+@import url("accueil.css");
+.banniere{padding:130px 24px 60px;text-align:center;color:#fff;background:linear-gradient(rgba(14,28,20,.78),rgba(14,28,20,.9)),var(--img,none) center/cover var(--vert)}
+.banniere h1{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:10px}
+.banniere p{opacity:.9;max-width:560px;margin:auto}
+.contenu{max-width:1100px;margin:auto;padding:56px 24px 100px}
+.deux{display:grid;grid-template-columns:3fr 2fr;gap:28px;align-items:start}
+.resume{position:sticky;top:90px}
+.carte{background:#fff;border-radius:var(--r);padding:28px;box-shadow:0 8px 30px rgba(22,38,28,.1)}
+.carte h2{color:var(--vert);font-size:1.5rem;margin-bottom:18px}
+form{display:grid;gap:14px}
+.champ label{display:block;font-weight:500;margin-bottom:6px;font-size:.95rem}
+.champ input:not([type=radio]):not([type=checkbox]),.champ select,.champ textarea{width:100%;font:inherit;padding:12px 14px;border:2px solid #e2dccf;border-radius:10px;background:#fff;transition:border-color .2s,box-shadow .2s}
+.champ textarea{resize:vertical;min-height:130px}
+.champ input:focus,.champ select:focus,.champ textarea:focus{outline:0;border-color:var(--or);box-shadow:0 0 0 4px rgba(233,162,59,.22)}
+.champ [aria-invalid=true]{border-color:var(--rouge)}
+.err{color:var(--rouge);font-size:.85rem;min-height:1.2em;margin-top:4px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.alerte{background:#fdeceb;color:#7d1f19;border-radius:10px;padding:12px 14px;font-size:.92rem}
+.alerte[hidden],[hidden]{display:none!important}
+.valider{width:100%;font:inherit;font-weight:700;cursor:pointer;margin-top:4px}
+.valider[disabled]{opacity:.6;cursor:not-allowed;transform:none}
+.vide{color:var(--gris);text-align:center;padding:26px 10px;grid-column:1/-1}
+.vide a{color:var(--rouge);text-decoration:underline}
+.pas{display:inline-flex;align-items:center;gap:10px}
+.pas button{width:34px;height:34px;border-radius:50%;border:2px solid var(--vert);background:#fff;color:var(--vert);font-size:1.1rem;cursor:pointer;line-height:1}
+.pas button:hover{background:var(--vert);color:#fff}
+.resume dl{display:grid;grid-template-columns:auto 1fr;gap:8px 14px}
+.resume dt{color:var(--gris)}
+.resume dd{text-align:right;font-weight:500}
+.resume .total{font-weight:700;font-size:1.1rem;color:var(--vert)}
+.ok{text-align:center;max-width:560px;margin:auto;display:grid;gap:12px;justify-items:center}
+.ok svg{width:96px;height:96px}
+.ok circle,.ok path{fill:none;stroke:var(--vert);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:300;stroke-dashoffset:300;animation:trace .7s ease forwards}
+.ok path{stroke:var(--or);animation-delay:.5s}
+@keyframes trace{to{stroke-dashoffset:0}}
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,160px);background:var(--vert);color:#fff;padding:12px 22px;border-radius:99px;transition:transform .35s;z-index:80;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.toast.on{transform:translate(-50%,0)}
+.badge{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:6px;padding:0 6px;border-radius:99px;background:var(--rouge);color:#fff;font-size:.75rem;font-weight:700}
+@media(max-width:860px){.deux{grid-template-columns:1fr}.resume{position:static}.duo{grid-template-columns:1fr}.carte{padding:22px 18px}}

@@ -1,5 +1,6 @@
 <?php
-// Fonctions communes : session, base de données, protection des pages.
+// Fonctions communes : session, base MySQL, protection des scripts.
+require_once __DIR__ . '/config.php';
 session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax']);
 if (session_status() === PHP_SESSION_NONE) session_start();
 
@@ -10,14 +11,11 @@ function page_sure($p) { return in_array($p, PAGES_SURES, true) ? $p : 'index.ht
 function db() {
     static $pdo;
     if (!$pdo) {
-        $dir = __DIR__ . '/data';
-        if (!is_dir($dir)) { mkdir($dir, 0750, true); file_put_contents($dir . '/.htaccess', "Require all denied\n"); }
-        $pdo = new PDO('sqlite:' . $dir . '/douala.sqlite'); // pour MySQL : new PDO('mysql:host=...;dbname=...;charset=utf8mb4', $user, $pass)
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $pdo->exec("CREATE TABLE IF NOT EXISTS utilisateurs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT, nom TEXT NOT NULL, email TEXT NOT NULL UNIQUE,
-            mot_de_passe TEXT NOT NULL, langue TEXT, adresse TEXT, telephone TEXT,
-            cree_le TEXT DEFAULT CURRENT_TIMESTAMP)");
+        $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASS, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ]);
     }
     return $pdo;
 }
@@ -31,7 +29,12 @@ function json_out($d, $code = 200) {
     exit;
 }
 
-// À appeler en haut de traitement_reservation.php et de tout script de commande.
+set_exception_handler(function ($e) {
+    error_log($e);
+    json_out(['ok' => false, 'erreurs' => ['global' => 'Erreur du serveur. Réessayez dans un instant.']], 500);
+});
+
+// À appeler en haut des scripts qui réservent ou commandent.
 function exiger_connexion($raison = 'reservation', $page = 'reservation.html') {
     if (connecte()) return;
     $url = 'inscription.html?raison=' . $raison . '&redirect=' . urlencode(page_sure($page));
@@ -40,7 +43,13 @@ function exiger_connexion($raison = 'reservation', $page = 'reservation.html') {
     exit;
 }
 
-// État de connexion pour garde.js : auth.php?statut=1
+// État de connexion pour garde.js et le pré-remplissage : auth.php?statut=1
 if (realpath($_SERVER['SCRIPT_FILENAME']) === __FILE__ && isset($_GET['statut'])) {
-    json_out(['connecte' => connecte(), 'nom' => $_SESSION['nom'] ?? null]);
+    $d = ['connecte' => connecte(), 'nom' => null, 'telephone' => null, 'adresse' => null];
+    if (connecte()) {
+        $q = db()->prepare('SELECT nom, telephone, adresse FROM utilisateurs WHERE id = ?');
+        $q->execute([$_SESSION['user_id']]);
+        $d = array_merge($d, $q->fetch() ?: []);
+    }
+    json_out($d);
 }

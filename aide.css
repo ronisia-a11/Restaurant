@@ -1,73 +1,15 @@
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  background: linear-gradient(to right, #C0392B, #27AE60);
-}
-
-header {
-  background-color: #C0392B;
-  padding: 15px;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-nav a {
-  color: #F1C40F;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Footer */
-.footer {
-  background-color: #C0392B;
-  color: white;
-  padding: 30px 20px;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.footer-links ul, .footer-social ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-links a, .footer-social a {
-  color: #F1C40F;
-  text-decoration: none;
-}
-
-/* Icônes colorées */
-.social-icons a {
-  margin: 0 10px;
-  font-size: 24px;
-}
-
-.tiktok { color: #000000; }
-.github { color: #333333; }
-.linkedin { color: #0077B5; }
-.Whatsapp { color: #25D366; }
-.Telephone { color: #C0392B; }
-
-/* Responsive */
-@media (max-width: 600px) {
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
-  }
-  .social-icons {
-    justify-content: center;
-  }
-}
+@import url("pages.css");
+.contenu.etroit{max-width:820px}
+.recherche{display:flex;gap:12px;margin-bottom:26px}
+.recherche input{flex:1;font:inherit;padding:13px 20px;border:2px solid #e2dccf;border-radius:99px;background:#fff}
+.recherche input:focus{outline:0;border-color:var(--or);box-shadow:0 0 0 4px rgba(233,162,59,.22)}
+.recherche button{font:inherit;border:2px solid var(--vert);background:transparent;color:var(--vert);border-radius:99px;padding:0 20px;cursor:pointer}
+details{background:#fff;border-radius:var(--r);margin-bottom:12px;box-shadow:0 4px 16px rgba(22,38,28,.08);overflow:hidden}
+summary{cursor:pointer;padding:18px 24px;font-weight:600;color:var(--vert);list-style:none;display:flex;justify-content:space-between;gap:14px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--rouge);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details .rep{padding:0 24px 20px;color:#444}
+details .rep a{color:var(--rouge);text-decoration:underline}
+.cta{margin-top:36px;text-align:center}
+.cta p{margin-bottom:14px;color:var(--gris)}

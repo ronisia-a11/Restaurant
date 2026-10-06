@@ -1,100 +1,15 @@
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  background: linear-gradient(to right, #C0392B, #27AE60);
-}
-
-header {
-  background-color: #C0392B;
-  padding: 15px;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-nav a {
-  color: #F1C40F;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Formulaires */
-form {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  margin: auto;
-  background: rgba(255,255,255,0.9);
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-input, select, textarea, button {
-  margin: 10px 0;
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-}
-
-button {
-  background-color: #2C3E50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-/* Footer */
-.footer {
-  background-color: #C0392B;
-  color: white;
-  padding: 30px 20px;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.footer-links ul, .footer-social ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-links a, .footer-social a {
-  color: #F1C40F;
-  text-decoration: none;
-}
-
-/* Icônes colorées */
-.social-icons a {
-  margin: 0 10px;
-  font-size: 24px;
-}
-
-.tiktok { color: #000000; }
-.github { color: #333333; }
-.linkedin { color: #0077B5; }
-.Whatsapp { color: #25D366; }
-.Telephone { color: #C0392B; }
-
-/* Responsive */
-@media (max-width: 600px) {
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
-  }
-  .social-icons {
-    justify-content: center;
-  }
-}
+@import url("pages.css");
+.types{border:0;display:grid;gap:10px}
+.types legend{font-weight:500;margin-bottom:8px;font-size:.95rem}
+.choix{position:relative;display:block}
+.choix input{position:absolute;opacity:0}
+.choix span{display:block;border:2px solid #e2dccf;border-radius:10px;padding:12px 14px;cursor:pointer;transition:.2s}
+.choix b{display:block;font-weight:600}
+.choix small{color:var(--gris)}
+.choix input:checked+span{border-color:var(--or);background:#fff8ea}
+.choix input:focus-visible+span{outline:3px solid var(--or);outline-offset:2px}
+.pers{display:flex;align-items:center;gap:12px}
+.pers input{width:84px!important;text-align:center}
+.info{font-size:.88rem;color:var(--gris);margin-top:4px}
+.ok p{color:var(--gris)}
+.ok .num{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--rouge)}
