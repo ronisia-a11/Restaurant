@@ -4,7 +4,7 @@
   const racine = document.documentElement;
   racine.style.visibility = 'hidden';
   const page = location.pathname.split('/').pop() || 'index.html';
-  const raison = page === 'livraison.html' ? 'commande' : 'reservation';
+  const raison = (page === 'livraison.html' || page === 'suivi.html') ? 'commande' : 'reservation';
   const reveler = () => { racine.style.visibility = ''; };
   setTimeout(reveler, 4000);
   fetch('auth.php?statut=1', { credentials: 'same-origin' })

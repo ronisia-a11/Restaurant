@@ -124,7 +124,7 @@
   <script>
     const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
     const P = new URLSearchParams(location.search);
-    const PAGES = ['index.html','menus.html','reservation.html','livraison.html','aide.html','contact.html'];
+    const PAGES = ['index.html','menus.html','reservation.html','livraison.html','suivi.html','aide.html','contact.html'];
     const suite = PAGES.includes(P.get('redirect')) ? P.get('redirect') : 'index.html';
     $$('.redir').forEach(i => i.value = suite);
 

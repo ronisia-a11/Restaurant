@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suivi de commande - Douala Délices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="suivi.css">
+  <script src="garde.js"></script>
+</head>
+<body>
+  <header id="entete" class="scrolled">
+    <nav>
+      <a class="logo" href="index.html">Douala <span>Délices</span></a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">&#9776;</button>
+      <ul id="liens">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="inscription.html">Inscription</a></li>
+        <li><a href="menus.html">Menus</a></li>
+        <li><a href="reservation.html">Réservation</a></li>
+        <li><a href="livraison.html">Livraison</a></li>
+        <li><a href="aide.html">Aide</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="banniere" style="--img:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1600&q=70')">
+    <h1>Suivre mes commandes</h1>
+    <p>L'état de vos commandes, mis à jour automatiquement.</p>
+  </section>
+
+  <main class="contenu etroit">
+
+    <p class="maj" id="maj" aria-live="polite"></p>
+    <div id="liste" aria-live="polite"><p class="vide">Chargement…</p></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Navigation -->
+      <div class="footer-links">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="inscription.html">Inscription</a></li>
+          <li><a href="menus.html">Menus</a></li>
+          <li><a href="reservation.html">Réservation</a></li>
+          <li><a href="livraison.html">Livraison</a></li>
+          <li><a href="aide.html">Aide</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <!-- Réseaux sociaux -->
+      <div class="footer-social">
+        <h3>Me suivre</h3>
+        <ul>
+          <li><a href="mailto:offilieoffilie@gmail.com">Mon Gmail</a></li>
+        </ul>
+        <div class="social-icons">
+          <a href="https://www.tiktok.com/@linformaticien18" target="_blank" class="tiktok" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://github.com/ronisia-a11" target="_blank" class="github" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/ronis-offilie-falleu-lendeu-3676a8395/" target="_blank" class="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 RONIS OFFILIE. Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="site.js"></script>
+  <script src="suivi.js"></script>
+</body>
+</html>

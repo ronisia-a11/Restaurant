@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Tableau de bord - Douala Délices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <section id="connexion" class="login" hidden>
+    <form id="formLogin" class="carte-login" novalidate>
+      <a class="logo" href="index.html">Douala <span>Délices</span></a>
+      <h1>Espace équipe</h1>
+      <p>Connectez-vous avec votre nom et votre mot de passe.</p>
+      <div class="alerte" id="alerteLogin" role="alert" hidden></div>
+      <label>Nom<input name="nom" autocomplete="username" autocapitalize="none" required></label>
+      <label>Mot de passe
+        <span class="mdp"><input name="mot_de_passe" type="password" autocomplete="current-password" required><button type="button" id="oeil" aria-pressed="false">Afficher</button></span>
+      </label>
+      <button class="btn-d" id="entrer">Entrer</button>
+      <a class="retour" href="index.html">← Retour au site</a>
+    </form>
+  </section>
+
+  <div id="app" hidden>
+    <header class="top">
+      <a class="logo" href="index.html">Douala <span>Délices</span> <small>Équipe</small></a>
+      <nav id="onglets" role="tablist" aria-label="Sections"></nav>
+      <div class="moi"><span id="qui"></span><button id="sortir" class="mini">Déconnexion</button></div>
+    </header>
+    <main id="vue" aria-live="polite"></main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="dashboard.js"></script>
+</body>
+</html>

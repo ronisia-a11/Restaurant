@@ -4,7 +4,7 @@ require_once __DIR__ . '/config.php';
 session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax']);
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-const PAGES_SURES = ['index.html', 'menus.html', 'reservation.html', 'livraison.html', 'aide.html', 'contact.html'];
+const PAGES_SURES = ['index.html', 'menus.html', 'reservation.html', 'livraison.html', 'suivi.html', 'aide.html', 'contact.html'];
 
 function page_sure($p) { return in_array($p, PAGES_SURES, true) ? $p : 'index.html'; }
 
